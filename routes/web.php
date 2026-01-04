@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trades/{trade}/close', TradeClose::class)->name('trades.close');
 
     Route::view('/profile', 'profile')->name('profile');
+    
 });
 
 require __DIR__.'/auth.php';
