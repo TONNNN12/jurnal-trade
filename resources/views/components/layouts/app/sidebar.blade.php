@@ -12,10 +12,40 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                </flux:navlist.group>
-            </flux:navlist>
+    {{-- PLATFORM --}}
+    <flux:navlist.group :heading="__('Platform')" class="grid">
+        <flux:navlist.item
+            icon="home"
+            :href="route('dashboard')"
+            :current="request()->routeIs('dashboard')"
+            wire:navigate
+        >
+            {{ __('Dashboard') }}
+        </flux:navlist.item>
+    </flux:navlist.group>
+
+    {{-- TRADING JOURNAL --}}
+    <flux:navlist.group :heading="__('Trading Journal')" class="grid mt-4">
+        <flux:navlist.item
+            icon="chart-bar"
+            :href="route('trades.index')"
+            :current="request()->routeIs('trades.*')"
+            wire:navigate
+        >
+            {{ __('Jurnal Trade') }}
+        </flux:navlist.item>
+
+        <flux:navlist.item
+            icon="building-library"
+            :href="route('stocks.index')"
+            :current="request()->routeIs('stocks.*')"
+            wire:navigate
+        >
+            {{ __('Master Saham') }}
+        </flux:navlist.item>
+    </flux:navlist.group>
+</flux:navlist>
+
 
             <flux:spacer />
 
