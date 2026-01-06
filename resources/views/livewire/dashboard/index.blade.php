@@ -69,4 +69,56 @@
             </div>
         </div>
     </div>
+    {{-- EQUITY CURVE --}}
+<div class="mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="mb-3">📈 Equity Curve</h5>
+
+            @if ($equityCurve->count() === 0)
+                <p class="text-muted">Belum ada trade closed.</p>
+            @else
+                <canvas id="equityChart" height="100"></canvas>
+            @endif
+        </div>
+    </div>
+</div>
+@if ($equityCurve->count() > 0)
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const equityData = @json($equityCurve);
+
+        const labels = equityData.map(item => item.date);
+        const data = equityData.map(item => item.equity);
+
+        const ctx = document.getElementById('equityChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Equity',
+                    data: data,
+                    tension: 0.3,
+                    borderWidth: 2,
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+@endif
+
 </div>
